@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <title>আমার Add Money History</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <style>
+    /* Reset & Base */
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      background: #f9fafb;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 15px;
+      color: #2c3e50;
+    }
+
+    h2 {
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #e2136e;
+      text-align: center;
+      font-size: 1.8rem;
+      user-select: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgb(0 0 0 / 0.1);
+      padding: 25px 20px;
+      overflow-x: auto;
+    }
+
+    /* Responsive table */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 12px;
+      font-size: 15px;
+      min-width: 600px;
+    }
+    thead tr {
+      background-color: #e2136e;
+      color: white;
+      text-align: left;
+      font-weight: 700;
+      user-select: none;
+    }
+    thead th {
+      padding: 12px 15px;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      background: #fcfcfc;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+      border-radius: 12px;
+      transition: background-color 0.3s ease;
+    }
+    tbody tr:hover {
+      background: #ffe6f0;
+    }
+    tbody td {
+      padding: 14px 15px;
+      vertical-align: middle;
+      white-space: nowrap;
+      color: #34495e;
+    }
+
+    /* Status badges */
+    .status {
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      user-select: none;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.07);
+    }
+    .pending {
+      background-color: #f39c12;
+      color: #fff;
+    }
+    .successful {
+      background-color: #27ae60;
+      color: #fff;
+    }
+    .rejected {
+      background-color: #e74c3c;
+      color: #fff;
+    }
+
+    /* No data message */
+    #noData {
+      text-align: center;
+      padding: 40px 10px;
+      color: #999;
+      font-size: 1.1rem;
+      user-select: none;
+    }
+
+    /* Material Icon inside status */
+    .material-icons {
+      font-size: 18px;
+      vertical-align: middle;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 720px) {
+      thead th, tbody td {
+        padding: 10px 8px;
+      }
+      .container {
+        padding: 15px 10px;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      table {
+        min-width: 100%;
+        font-size: 14px;
+      }
+      tbody tr:hover {
+        background: #fce4ec;
+      }
+      .status {
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <h2>আমার Add Money History</h2>
+  <div class="container">
+    <table aria-label="Add Money History Table">
+      <thead>
+        <tr>
+          <th>টাকা</th>
+          <th>ট্রানজেকশন আইডি</th>
+          <th>ইনভয়েস আইডি</th>
+          <th>তারিখ</th>
+          <th>স্টেটাস</th>
+        </tr>
+      </thead>
+      <tbody id="historyTableBody">
+        <tr><td colspan="5" id="noData">⏳ Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Firebase + Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, query, where, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDNA3h0fExL49Bth-G8nnw_PZ_laNn2tUc",
+      authDomain: "hgzy-signal-gpt.firebaseapp.com",
+      projectId: "hgzy-signal-gpt",
+      storageBucket: "hgzy-signal-gpt.appspot.com",
+      messagingSenderId: "898048478460",
+      appId: "1:898048478460:web:78091c7128f9193f27db79",
+      measurementId: "G-LQH91EEL96"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    const tableBody = document.getElementById('historyTableBody');
+    const noDataRow = document.getElementById('noData');
+
+    function createStatusHTML(status) {
+      if(status === 'successful') {
+        return `<span class="status successful"><span class="material-icons">check_circle</span> সফল হয়েছে</span>`;
+      } else if(status === 'rejected') {
+        return `<span class="status rejected"><span class="material-icons">cancel</span> বাতিল হয়েছে</span>`;
+      } else {
+        return `<span class="status pending"><span class="material-icons">hourglass_top</span> প্রক্রিয়াধীন</span>`;
+      }
+    }
+
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        alert('অনুগ্রহ করে লগইন করুন');
+        window.location.href = '/login.html';
+        return;
+      }
+
+      const q = query(
+        collection(db, 'payments'),
+        where('uid', '==', user.uid),
+        orderBy('createdAt', 'desc')
+      );
+
+      onSnapshot(q, snapshot => {
+        if (snapshot.empty) {
+          noDataRow.innerText = 'কোনো Add Money রেকর্ড পাওয়া যায়নি।';
+          return;
+        }
+
+        tableBody.innerHTML = ''; // clear table
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const date = data.createdAt?.toDate().toLocaleString('bn-BD') || 'N/A';
+
+          const statusHTML = createStatusHTML(data.status || 'pending');
+
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>৳ ${data.amount}</td>
+            <td title="${data.transactionId}">${data.transactionId}</td>
+            <td title="${data.invoiceId}">${data.invoiceId}</td>
+            <td>${date}</td>
+            <td>${statusHTML}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
