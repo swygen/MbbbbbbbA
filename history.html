@@ -5,33 +5,27 @@
   <title>আমার Add Money History</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-    }
     body {
       font-family: 'Noto Sans Bengali', sans-serif;
       background: #f4f6f9;
       margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    h2 {
-      color: #e2136e;
-      margin-bottom: 20px;
-      text-align: center;
+      padding: 10px;
     }
     .container {
-      width: 100%;
-      max-width: 960px;
-      background: #fff;
-      border-radius: 12px;
+      max-width: 1000px;
+      margin: auto;
+      background: white;
       padding: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
       overflow-x: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #e2136e;
+      margin-bottom: 20px;
     }
     table {
       width: 100%;
@@ -39,7 +33,7 @@
       min-width: 600px;
     }
     th, td {
-      padding: 14px 16px;
+      padding: 12px;
       text-align: left;
       border-bottom: 1px solid #eee;
       font-size: 15px;
@@ -47,64 +41,62 @@
     th {
       background-color: #e2136e;
       color: white;
-      position: sticky;
-      top: 0;
-      z-index: 1;
     }
     tr:hover {
       background-color: #f9f9f9;
     }
     .status {
-      font-weight: 700;
+      font-weight: bold;
       padding: 6px 14px;
-      border-radius: 20px;
-      color: white;
+      border-radius: 12px;
       display: inline-block;
+      color: white;
       font-size: 14px;
     }
     .pending {
-      background-color: #ff9800;
+      background-color: orange;
     }
     .successful {
-      background-color: #4caf50;
+      background-color: green;
     }
     .rejected {
-      background-color: #f44336;
+      background-color: red;
     }
     #noData {
       text-align: center;
-      padding: 40px 0;
       color: #777;
-      font-size: 18px;
+      padding: 20px;
     }
-    @media(max-width: 600px){
+
+    @media screen and (max-width: 600px) {
       th, td {
-        padding: 10px 8px;
         font-size: 13px;
+        padding: 10px 8px;
       }
     }
   </style>
 </head>
 <body>
-  <h2>আমার Add Money History</h2>
+  <h2><span class="material-icons">history</span> আমার Add Money History</h2>
   <div class="container">
     <table>
       <thead>
         <tr>
           <th>টাকা</th>
           <th>ট্রানজেকশন আইডি</th>
-          <th>ইনভয়েস আইডি</th>
+          <th>ইনভয়েস</th>
+          <th>পদ্ধতি</th>
           <th>তারিখ</th>
           <th>স্টেটাস</th>
         </tr>
       </thead>
       <tbody id="historyTableBody">
-        <tr><td colspan="5" id="noData">⏳ লোড হচ্ছে...</td></tr>
+        <tr><td colspan="6" id="noData">⏳ লোড হচ্ছে...</td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- Firebase JS SDK -->
+  <!-- Firebase Scripts -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getFirestore, collection, query, where, onSnapshot, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -125,24 +117,24 @@
     const auth = getAuth();
 
     const tableBody = document.getElementById('historyTableBody');
-    const noDataCell = document.getElementById('noData');
+    const noDataRow = document.getElementById('noData');
 
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, user => {
       if (!user) {
         alert('অনুগ্রহ করে লগইন করুন');
         window.location.href = '/login.html';
         return;
       }
 
-      const paymentsQuery = query(
+      const q = query(
         collection(db, 'payments'),
         where('uid', '==', user.uid),
         orderBy('createdAt', 'desc')
       );
 
-      onSnapshot(paymentsQuery, (snapshot) => {
+      onSnapshot(q, snapshot => {
         if (snapshot.empty) {
-          noDataCell.innerText = 'কোনো Add Money রেকর্ড পাওয়া যায়নি।';
+          noDataRow.innerText = 'আপনার কোনো Add Money ইতিহাস পাওয়া যায়নি।';
           return;
         }
 
@@ -153,28 +145,30 @@
           const date = data.createdAt?.toDate().toLocaleString('bn-BD') || 'N/A';
 
           let statusClass = 'pending';
-          let statusText = 'প্রক্রিয়াধীন';
+          let statusText = 'অপেক্ষমাণ';
+
           if (data.status === 'successful') {
             statusClass = 'successful';
-            statusText = 'সফল হয়েছে';
+            statusText = 'সফল';
           } else if (data.status === 'rejected') {
             statusClass = 'rejected';
-            statusText = 'বাতিল হয়েছে';
+            statusText = 'বাতিল';
           }
 
           const row = document.createElement('tr');
           row.innerHTML = `
             <td>৳ ${data.amount}</td>
-            <td>${data.transactionId || 'N/A'}</td>
-            <td>${data.invoiceId || 'N/A'}</td>
+            <td>${data.transactionId || '—'}</td>
+            <td>${data.invoiceId || '—'}</td>
+            <td>${data.method || '—'}</td>
             <td>${date}</td>
             <td><span class="status ${statusClass}">${statusText}</span></td>
           `;
           tableBody.appendChild(row);
         });
-      }, (error) => {
-        console.error('ডাটা লোডিং সমস্যা:', error);
-        noDataCell.innerText = 'ডাটা লোড করতে সমস্যা হয়েছে।';
+      }, err => {
+        console.error("❌ Snapshot Error:", err);
+        noDataRow.innerText = 'তথ্য লোড করতে সমস্যা হয়েছে।';
       });
     });
   </script>
