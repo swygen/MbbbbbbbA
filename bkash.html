@@ -50,13 +50,13 @@
       font-weight: bold;
     }
     .section {
-      background: #CF2771;
+      background: #FF4081;
       border-radius: 12px;
       padding: 16px;
       margin-top: 16px;
     }
     .section input {
-      width: 93%;
+      width: 94%;
       padding: 12px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -71,6 +71,7 @@
       font-size: 15px;
       margin: 6px 0;
       color: #FFFFFF;
+      font-weight: bold;
     }
     .section .highlight {
       color: #FDE047;
@@ -80,11 +81,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #FFFFFF ;
+      background: #fff;
       padding: 10px;
       border-radius: 8px;
       margin: 8px 0;
-      border: 1px solid #FFFFFF;
+      border: 1px solid #ddd;
     }
     .copy-box button {
       background: #e2136e;
@@ -95,9 +96,9 @@
       cursor: pointer;
     }
     .verify-btn {
-      background: #FFFFFF;
-      color: #00C853;
-      padding: 20px;
+      background: #e2136e;
+      color: #fff;
+      padding: 14px;
       width: 100%;
       border: none;
       font-size: 16px;
@@ -108,7 +109,7 @@
     .popup {
       display: none;
       position: fixed;
-      top: 20%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       background: white;
@@ -119,7 +120,7 @@
       text-align: center;
     }
     .popup img {
-      width: 100px;
+      width: 200px;
     }
   </style>
 </head>
@@ -149,7 +150,7 @@
       <li><span class="highlight">"Send Money"</span> -এ ক্লিক করুন।</li>
       <li>গ্রাহক নম্বর হিসাবে লিখুন:</li>
       <div class="copy-box">
-        <span id="bkashNumber"><b>01775716460</b></span>
+        <span id="bkashNumber">01775716460</span>
         <button onclick="copyNumber()">Copy</button>
       </div>
       <li>টাকার পরিমাণ: <span class="highlight" id="amountText">Loading...</span></li>
@@ -157,14 +158,14 @@
       <li>সব ঠিক থাকলে আপনি bKash থেকে কনফার্মেশন পাবেন।</li>
       <li>তারপর উপরের ট্রানজেকশন আইডি দিন ও নিচের <b>VERIFY</b> বাটনে ক্লিক করুন।</li>
     </ul>
-<br>
+
     <button class="verify-btn" onclick="submitPayment()">VERIFY</button>
   </div>
 </div>
 
 <div class="popup" id="popup">
   <img src="https://i.ibb.co/CBR0Bxj/verified.png" alt="✔">
-  <p>✅ আপনার Add Money Request সফল ভাবে দাখিল হলো।<br>দয়া করে কিছুক্ষণ অপেক্ষা করুন আমরা যাচাই করছি!<br>ধন্যবাদ ™</p>
+  <p> আপনার Add Money Request সফল ভাবে দাখিল হলো।<br>দয়া করে কিছুক্ষণ অপেক্ষা করুন আমরা যাচাই করছি!<br>ধন্যবাদ ™</p>
 </div>
 
 <!-- Firebase -->
@@ -173,7 +174,7 @@
   import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-  const firebaseConfig = {
+ const firebaseConfig = {
   apiKey: "AIzaSyChZH6yY3nCIV-CXyQr0aTomBxy_V4HnKM",
   authDomain: "mbbazar-bd.firebaseapp.com",
   projectId: "mbbazar-bd",
@@ -191,7 +192,7 @@
   const amount = urlParams.get('amount') || '0';
   document.getElementById('amountDisplay').innerText = `৳ ${amount}`;
   document.getElementById('amountText').innerText = `৳ ${amount}`;
-  const invoiceId = 'BK' + Math.random().toString(36).substring(2, 10).toUpperCase();
+  const invoiceId = 'BKA' + Math.random().toString(36).substring(2, 10).toUpperCase();
   document.getElementById('invoiceId').innerText = invoiceId;
 
   window.copyNumber = function () {
@@ -220,6 +221,9 @@
           await addDoc(collection(db, 'payments'), data);
           document.getElementById('popup').style.display = 'block';
           document.getElementById('trxId').value = '';
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 5000);
         } catch (error) {
           alert('❌ সাবমিট ব্যর্থ হয়েছে: ' + error.message);
         }
