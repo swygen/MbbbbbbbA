@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBBazar.BD</title>
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(145deg, #000000, #1a1a1a);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    dotlottie-player {
+      margin-top: -50px;
+    }
+
+    .premium-text {
+      margin-top: -20px;
+      font-size: 28px;
+      background: linear-gradient(90deg, #00ffe1, #ff00c8, #00ffe1);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 5s infinite linear;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .premium-icon {
+      width: 50px;
+      height: 50px;
+      filter: drop-shadow(0 0 5px #ffd700);
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+  </style>
+</head>
+<body>
+  <dotlottie-player
+    src="https://lottie.host/76edba34-37a6-454e-bf43-fa67b36bbdbe/NgX5eDRyV4.lottie"
+    background="transparent"
+    speed="1"
+    style="width: 300px; height: 300px"
+    loop autoplay>
+  </dotlottie-player>
+
+  <div class="premium-text">
+    <img src="https://i.postimg.cc/L8gyfQDt/file-0000000011fc61f884626c8dc5aea95a.png" alt="Premium Icon" class="premium-icon">
+    MBBazar.BD
+  </div>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "signup.html";
+    }, 6000);
+  </script>
+</body>
+</html>

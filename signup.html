@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Sign Up - MBBazar.BD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }body {
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: #141414;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 0 25px rgba(0, 255, 200, 0.2);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.logo img {
+  width: 70px;
+}
+
+.logo h2 {
+  font-size: 22px;
+  background: linear-gradient(90deg, #00ffee, #00ff88);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: typing 3s steps(20, end) infinite;
+}
+
+@keyframes typing {
+  0% {opacity: 0;}
+  50% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.form-group {
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px 12px 40px;
+  border-radius: 12px;
+  border: none;
+  background: #1e1e1e;
+  color: white;
+  font-size: 14px;
+}
+
+.form-group i {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: #00ffc8;
+}
+
+.phone-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phone-prefix {
+  background: #222;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.phone-prefix img {
+  width: 20px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #00ffc8, #00ffa1);
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  box-shadow: 0 0 15px #00ffc8aa;
+}
+
+.switch {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.switch a {
+  color: #00ffc8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+  </style>
+</head><body>
+  <div class="container">
+    <div class="logo">
+    <h2> Create An Account MBBazar.BD</h2>
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+  <i class="fas fa-user"></i>
+  <input type="text" id="name" placeholder="Full Name">
+</div>
+
+<div class="form-group">
+  <i class="fas fa-envelope"></i>
+  <input type="email" id="email" placeholder="Email Address">
+</div>
+
+<div class="form-group phone-group">
+  <div class="phone-prefix">
+    <img src="https://flagcdn.com/w40/bd.png" alt="bd">
+    +880
+  </div>
+  <input type="tel" id="phone" placeholder="1XXXXXXXXX" maxlength="10">
+</div>
+
+<div class="form-group">
+  <i class="fas fa-lock"></i>
+  <input type="password" id="password" placeholder="Password">
+</div>
+
+<div class="form-group">
+  <i class="fas fa-lock"></i>
+  <input type="password" id="confirmPassword" placeholder="Confirm Password">
+</div>
+
+<button onclick="signUp()">Sign Up</button>
+
+<div class="switch">
+  Already have an account? <a href="login.html">Login</a>
+</div>
+
+  </div>  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDNA3h0fExL49Bth-G8nnw_PZ_laNn2tUc",
+      authDomain: "hgzy-signal-gpt.firebaseapp.com",
+      projectId: "hgzy-signal-gpt",
+      storageBucket: "hgzy-signal-gpt.firebasestorage.app",
+      messagingSenderId: "898048478460",
+      appId: "1:898048478460:web:78091c7128f9193f27db79",
+      measurementId: "G-LQH91EEL96"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.signUp = function () {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = "+880" + document.getElementById('phone').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    }
+  </script></body></html>

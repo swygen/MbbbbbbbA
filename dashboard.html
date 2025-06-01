@@ -1,0 +1,986 @@
+<!-- Google Material Icons CDN -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Premium Popup Modal -->
+<div id="premiumPopup" class="popup-modal">
+  <div class="popup-card">
+    <span class="close-btn" id="closePremium">
+      <span class="material-icons">close</span>
+    </span>
+
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <img src="https://i.postimg.cc/Mp8d04VM/20250530-220330.png" alt="MBBazar BD Logo" />
+    </div>
+
+    <!-- Messages -->
+    <div class="message-section">
+      <span class="material-icons premium-icon">stars</span>
+      <h2>স্বাগতম MBBazar BD তে!</h2>
+      <p>সর্বোচ্চ MB এবং মিনিট অফারে আপনাকে স্বাগত।</p>
+    </div>
+
+    <div class="message-section">
+      <span class="material-icons premium-icon">attach_money</span>
+      <h3>💸 Fast Add Money</h3>
+      <p>দ্রুত ও নিরাপদ অর্থ সংযোজন।</p>
+    </div>
+
+    <div class="message-section">
+      <span class="material-icons premium-icon">local_shipping</span>
+      <h3>🚀 Fast Delivery</h3>
+      <p>২৪ ঘণ্টার মধ্যে দ্রুত সার্ভিস নিশ্চিত।</p>
+    </div>
+
+    <div class="message-section">
+      <span class="material-icons premium-icon">wifi_tethering</span>
+      <h3>সকল সিমের MB + মিনিট অফার</h3>
+      <p>কম দামে সেরা অফার পেয়ে যান।</p>
+    </div>
+
+    <div class="message-section">
+      <span class="material-icons premium-icon">support_agent</span>
+      <h3>২৪ ঘন্টা সার্ভিস</h3>
+      <p>নিরবচ্ছিন্ন সাহায্য ও সাপোর্ট।</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Popup Modal Background */
+  .popup-modal {
+    display: flex; /* Show on load */
+    position: fixed;
+    z-index: 10000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(10,10,25,0.85), rgba(33, 33, 66, 0.95));
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  /* Popup Card */
+  .popup-card {
+    position: relative;
+    background: #fff;
+    border-radius: 18px;
+    max-width: 380px;
+    width: 100%;
+    padding: 30px 25px 35px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    text-align: center;
+    color: #222;
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+
+  /* Close Button */
+  .close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s ease;
+  }
+  .close-btn:hover {
+    color: #000;
+  }
+
+  /* Logo Section */
+  .logo-section {
+    margin-bottom: 22px;
+  }
+  .logo-section img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px #1a73e8);
+    border-radius: 50%;
+  }
+
+  /* Message Section */
+  .message-section {
+    margin-bottom: 24px;
+  }
+
+  .message-section h2 {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #1a73e8;
+  }
+
+  .message-section h3 {
+    font-weight: 600;
+    font-size: 19px;
+    margin-bottom: 6px;
+    color: #0d47a1;
+  }
+
+  .message-section p {
+    font-size: 15px;
+    color: #444;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Premium Icon */
+  .premium-icon {
+    font-size: 32px;
+    color: #fbc02d; /* Gold color */
+    margin-bottom: 6px;
+    user-select: none;
+  }
+
+  /* Scrollbar for mobile if content overflows */
+  .popup-card::-webkit-scrollbar {
+    width: 6px;
+  }
+  .popup-card::-webkit-scrollbar-thumb {
+    background-color: rgba(26, 115, 232, 0.5);
+    border-radius: 3px;
+  }
+
+  /* Responsive: smaller on mobile */
+  @media (max-width: 480px) {
+    .popup-card {
+      padding: 25px 18px 28px;
+      max-width: 320px;
+    }
+    .message-section h2 {
+      font-size: 20px;
+    }
+    .message-section h3 {
+      font-size: 16px;
+    }
+    .premium-icon {
+      font-size: 26px;
+    }
+    .logo-section img {
+      width: 65px;
+      height: 65px;
+    }
+  }
+</style>
+
+<script>
+  // Close popup on clicking the cross
+  document.getElementById('closePremium').onclick = function() {
+    document.getElementById('premiumPopup').style.display = 'none';
+  };
+
+  // Auto close after 10 seconds (optional)
+  setTimeout(() => {
+    document.getElementById('premiumPopup').style.display = 'none';
+  }, 10000);
+</script>
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9fb;
+    }/* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.menu-btn {
+  font-size: 24px;
+  cursor: pointer;
+  color: #444;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding-top: 70px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+}
+
+.sidebar a:hover {
+  background: #f1f1f1;
+}
+
+.show-sidebar {
+  left: 0;
+}
+
+/* Main Content */
+main {
+  padding: 80px 20px 80px;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: white;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+  padding: 10px 0;
+  border-radius: 20px 20px 0 0;
+  z-index: 999;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  color: #999;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-nav a.active {
+  color: #ff5b5b;
+}
+
+.bottom-nav i {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.bottom-nav .active i {
+  background: linear-gradient(135deg, #ff7b7b, #ff4f4f);
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://i.postimg.cc/sxV1Qt8k/20250530-220330.png" alt="Logo">
+      <strong>MBBazar.BD</strong>
+    </div>
+    <div class="menu-btn" onclick="toggleSidebar()">
+      <i class="ri-menu-line"></i>
+    </div>
+  </header>  <div class="sidebar" id="sidebar">
+    <a href="faq.html"><i class="ri-question-line"></i>FAQ</a>
+    <a href="notice.html"><i class="ri-notification-2-line"></i>Update Notice</a>
+    <a href="support.html"><i class="ri-customer-service-2-line"></i>Support</a>
+    <a href="policy.html"><i class="ri-shield-user-line"></i>Policy</a>
+  </div>  <main>
+    <!-- Main dashboard content here -->
+    <!-- ✅ Slim Smart Slider - Mobile Friendly -->
+    <div class="smart-slider">
+    <img class="slider-image active" src="https://i.postimg.cc/VNhpctQ2/1000236510.jpg" alt="Slide 1">
+    <img class="slider-image" src="https://i.postimg.cc/7Y3d5gYZ/1000236511.jpg" alt="Slide 2">
+    </div>
+    
+    <style>
+    .smart-slider {
+    width: 100%;
+    max-width: 150%;
+    height: 500px; /* কম উচ্চতা */
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+    
+    .slider-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    }
+    
+    .slider-image.active {
+    opacity: 1;
+    z-index: 1;
+    }
+    
+    @media (max-width: 600px) {
+    .smart-slider {
+    height: 150px; /* মোবাইলে আরও কম উচ্চতা */
+    }
+    }
+    </style>
+    
+    <script>
+    const images = document.querySelectorAll('.slider-image');
+    let current = 0;
+    
+    setInterval(() => {
+    images[current].classList.remove('active');
+    current = (current + 1) % images.length;
+    images[current].classList.add('active');
+    }, 3000);
+    </script>
+    <!-- ✅ Premium Service Section -->
+    <div class="premium-service">
+    <h2>
+    <img src="https://i.postimg.cc/X7Z84kpk/20250530-220330.png" alt="icon" class="icon">
+    SELECT AN SERVICE AND GET OFFER
+    </h2>
+    <div class="service-grid">
+    <div class="service-card" onclick="openPopup('Grameenphone')">
+    <img src="https://i.postimg.cc/jjHdyPmV/images-4.jpg" alt="GP">
+    <p>Grameenphone</p>
+    </div>
+    <div class="service-card" onclick="openPopup('Banglalink')">
+    <img src="https://i.postimg.cc/zXpJDqWN/images-1-1.png" alt="BL">
+    <p>Banglalink</p>
+    </div>
+    <div class="service-card" onclick="openPopup('Robi')">
+    <img src="https://i.postimg.cc/VkCYcpqB/images-6.jpg" alt="Robi">
+    <p>Robi</p>
+    </div>
+    <div class="service-card" onclick="openPopup('Airtel')">
+    <img src="https://i.postimg.cc/brZvSJt4/images-5.jpg" alt="Airtel">
+    <p>Airtel</p>
+    </div>
+    <div class="service-card" onclick="openPopup('Teletalk')">
+    <img src="https://i.postimg.cc/C5pF5Nwn/images-1-4.png" alt="Teletalk">
+    <p>Teletalk</p>
+    </div>
+    <div class="service-card" onclick="openPopup('Skitto')">
+    <img src="https://i.postimg.cc/hGJg0wj7/images-1-3.png" alt="Skitto">
+    <p>Skitto</p>
+    </div>
+    </div>
+    </div>
+    
+    <!-- ✅ Popup Modal -->
+    <div id="popup" class="popup-overlay">
+    <div class="popup-box">
+    <img src="https://i.postimg.cc/X7Z84kpk/20250530-220330.png" alt="Logo" class="popup-logo">
+    <p id="popup-question">আপনি কি সকল অফার দেখতে চান?</p>
+    <div class="popup-buttons">
+    <button onclick="confirmLink()">
+    <img src="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/check_circle/default/24px.svg" alt="Yes" class="icon-btn"> হ্যাঁ
+    </button>
+    <button onclick="closePopup()">
+    <img src="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/cancel/default/24px.svg" alt="No" class="icon-btn"> না
+    </button>
+    </div>
+    </div>
+    </div>
+    
+    <!-- ✅ CSS -->
+    <style>
+    .premium-service {
+    padding: 20px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    }
+    
+    .premium-service h2 {
+    font-size: 20px;
+    background: linear-gradient(to right, #1e1e1e, #333);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    }
+    
+    .premium-service .icon {
+    width: 50px;
+    height: 50px;
+    }
+    
+    .service-grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 15px;
+    }
+    
+    .service-card {
+    background: #111;
+    border-radius: 14px;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+    
+    .service-card:hover {
+    background: #222;
+    transform: scale(1.04);
+    }
+    
+    .service-card img {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 5px;
+    }
+    
+    .service-card p {
+    font-size: 14px;
+    font-weight: bold;
+    }
+    
+    .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    }
+    
+    .popup-box {
+    background: #fff;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    animation: zoomIn 0.3s ease-in-out;
+    }
+    
+    .popup-logo {
+    width: 68px;
+    margin-bottom: 12px;
+    }
+    
+    #popup-question {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 20px;
+    }
+    
+    .popup-buttons button {
+    padding: 10px 20px;
+    margin: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+    }
+    
+    .popup-buttons button:first-child {
+    background: #0f9d58;
+    color: #fff;
+    }
+    
+    .popup-buttons button:last-child {
+    background: #d32f2f;
+    color: #fff;
+    }
+    
+    .icon-btn {
+    width: 20px;
+    height: 20px;
+    }
+    
+    @keyframes zoomIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+    }
+    
+    @media(max-width: 600px){
+    .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+    }
+    }
+    </style>
+    
+    <!-- ✅ JavaScript -->
+    <script>
+    let selectedLink = "#";
+    function openPopup(serviceName) {
+    const pageName = serviceName.toLowerCase().replace(/\s+/g, '') + '.html';
+    selectedLink = pageName;
+    document.getElementById("popup-question").innerText = `আপনি কি ${serviceName} এর সকল অফার গুলো দেখতে চান?`;
+    document.getElementById("popup").style.display = "flex";
+    }
+    
+    function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    }
+    
+    function confirmLink() {
+    window.location.href = selectedLink;
+    }
+    </script>
+    <!-- OUR SERVICE PARTNER - Premium Floating Transparent -->
+    <div class="our-partner-section">
+    <h2 class="our-partner-title">OUR SERVICE PARTNER</h2>
+    <div class="our-partner-marquee">
+    <div class="partner-track">
+    <!-- Logos -->
+    <img src="https://i.postimg.cc/KYHQr3MN/20250530-201544.png" alt="Grameenphone">
+    <img src="https://i.postimg.cc/fySdffPv/20250530-201716.png" alt="Robi">
+    <img src="https://i.postimg.cc/CLmZntdV/20250530-201632.png" alt="Banglalink">
+    <img src="https://i.postimg.cc/SKCqp2Mx/20250530-201650.png" alt="Airtel">
+    <img src="https://i.postimg.cc/J0JdsZRs/20250530-201742.png" alt="Teletalk">
+    <img src="https://i.postimg.cc/hGJg0wj7/images-1-3.png" alt="Skitto">
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(2).png" alt="Nagad">
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(3).png" alt="bKash">
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(5).png" alt="Upay">
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(6).png" alt="Rocket">
+    
+    <!-- Repeat for infinite loop -->
+    <img src="https://i.postimg.cc/KYHQr3MN/20250530-201544.png" alt="Grameenphone">
+    <img src="https://i.postimg.cc/fySdffPv/20250530-201716.png" alt="Robi">
+    <img src="https://i.postimg.cc/CLmZntdV/20250530-201632.png" alt="Banglalink">
+    <img src="https://i.postimg.cc/SKCqp2Mx/20250530-201650.png" alt="Airtel">
+    <img src="https://i.postimg.cc/J0JdsZRs/20250530-201742.png" alt="Teletalk">
+    <img src="https://i.postimg.cc/hGJg0wj7/images-1-3.png" alt="Skitto">
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(2).png" alt="Nagad">
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(3).png" alt="bKash">
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(5).png" alt="Upay">
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(6).png" alt="Rocket">
+    </div>
+    </div>
+    </div>
+    
+    <style>
+    /* ✅ Premium Transparent Service Partner Styles */
+    .our-partner-section {
+    width: 100%;
+    padding: 60px 10px;
+    background: transparent;
+    z-index: 1;
+    position: relative;
+    }
+    
+    .our-partner-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #00f0ff, #00c2ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    }
+    
+    .our-partner-marquee {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    }
+    
+    .partner-track {
+    display: flex;
+    gap: 70px;
+    animation: scrollPartners 35s linear infinite;
+    width: max-content;
+    align-items: center;
+    padding-left: 100%;
+    }
+    
+    .partner-track img {
+    height: 60px;
+    max-width: 130px;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: brightness(1) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+    }
+    
+    .partner-track img:hover {
+    transform: scale(1.08);
+    filter: brightness(1.2) drop-shadow(0 0 12px rgba(0, 255, 255, 0.5));
+    }
+    
+    @keyframes scrollPartners {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+    }
+    
+    /* 📱 Mobile Friendly */
+    @media (max-width: 768px) {
+    .our-partner-title {
+    font-size: 20px;
+    }
+    
+    .partner-track {
+    gap: 50px;
+    }
+    
+    .partner-track img {
+    height: 45px;
+    max-width: 100px;
+    }
+    }
+    </style>
+    <!DOCTYPE html>
+    <html lang="bn">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Transaction History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+    body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to right, #ffffff, #f7f9ff);
+    color: #111;
+    }
+    
+    .container {
+    max-width: 95%;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    overflow-x: auto;
+    }
+    
+    .header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    }
+    
+    .header img {
+    width: 36px;
+    height: 36px;
+    }
+    
+    .header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    }
+    
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: #fff;
+    }
+    
+    thead {
+    background-color: #f0f4ff;
+    }
+    
+    thead th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #dcdcdc;
+    }
+    
+    tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    color: #222;
+    vertical-align: top;
+    }
+    
+    tbody tr:hover {
+    background-color: #f9fcff;
+    }
+    
+    .icon {
+    vertical-align: middle;
+    color: #4a6ee0;
+    }
+    
+    @media (max-width: 600px) {
+    table, thead, tbody, th, td, tr {
+    font-size: 0.85rem;
+    }
+    
+    .header h2 {
+    font-size: 1.1rem;
+    }
+    }
+    </style>
+    </head>
+    <body>
+    
+    <div class="container">
+    <div class="header">
+    <img src="https://i.postimg.cc/SKL8Dph1/transaction-history.png" alt="Transaction Icon" />
+    <h2>
+    <span class="material-icons-outlined icon">history</span>
+    Last 10 Transaction History
+    </h2>
+    </div>
+    
+    <table>
+    <thead>
+    <tr>
+    <th><span class="material-icons-outlined icon">format_list_numbered</span> Serial</th>
+    <th><span class="material-icons-outlined icon">message</span> Message</th>
+    <th><span class="material-icons-outlined icon">check_circle</span> Status</th>
+    <th><span class="material-icons-outlined icon">event</span> Date & Time</th>
+    </tr>
+    </thead>
+    <tbody id="transaction-table">
+    <!-- Firebase data will appear here -->
+    </tbody>
+    </table>
+    </div>
+    
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    
+    const firebaseConfig = {
+    apiKey: "AIzaSyDNA3h0fExL49Bth-G8nnw_PZ_laNn2tUc",
+    authDomain: "hgzy-signal-gpt.firebaseapp.com",
+    projectId: "hgzy-signal-gpt",
+    storageBucket: "hgzy-signal-gpt.appspot.com",
+    messagingSenderId: "898048478460",
+    appId: "1:898048478460:web:78091c7128f9193f27db79"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    
+    const colRef = collection(db, "transactions");
+    const q = query(colRef, orderBy("timestamp", "desc"));
+    
+    const tableBody = document.getElementById("transaction-table");
+    
+    onSnapshot(q, (snapshot) => {
+    tableBody.innerHTML = "";
+    snapshot.forEach((doc) => {
+    const data = doc.data();
+    const date = data.timestamp?.toDate().toLocaleString('bn-BD', { hour12: false }) || "N/A";
+    
+    const row = document.createElement("tr");
+    row.innerHTML = `
+    <td>${data.serial || "N/A"}</td>
+    <td>${data.message || "N/A"}</td>
+    <td>${data.status || "Pending"}</td>
+    <td>${date}</td>
+    `;
+    tableBody.appendChild(row);
+    });
+    });
+    </script>
+    
+    </body>
+    </html>
+    <!-- 🌟 Premium Transparent Footer: Centered with Logo + Tagline + Social Icons -->
+    <div id="footer-premium">
+    <div class="footer-inner">
+    <!-- Logo -->
+    <img src="https://i.postimg.cc/Mp8d04VM/20250530-220330.png" alt="MBBazar BD Logo" class="footer-logo">
+    
+    <!-- Tagline -->
+    <p class="footer-tagline">Your Trusted Marketplace for Digital Products & Services</p>
+    
+    <!-- Social Media Icons -->
+    <div class="footer-social">
+    <a href="https://facebook.com" target="_blank" title="Facebook"><span class="material-icons">facebook</span></a>
+    <a href="https://instagram.com" target="_blank" title="Instagram"><span class="material-icons">photo_camera</span></a>
+    <a href="https://t.me" target="_blank" title="Telegram"><span class="material-icons">send</span></a>
+    <a href="mailto:support@mbbazarbd.com" title="Email"><span class="material-icons">mail</span></a>
+    </div>
+    
+    <!-- Footer Note -->
+    <p class="footer-bottom">© 2025 MBBazar BD. All Rights Reserved.</p>
+    </div>
+    </div>
+    
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- 🛡️ Scoped Premium Footer CSS -->
+    <style>
+    #footer-premium {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    padding: 30px 20px;
+    font-family: 'Segoe UI', 'Inter', sans-serif;
+    color: #111;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    z-index: 999;
+    position: relative;
+    }
+    
+    .footer-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    }
+    
+    .footer-logo {
+    height: 100px;
+    margin-bottom: 12px;
+    }
+    
+    .footer-tagline {
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 18px;
+    color: #222;
+    }
+    
+    .footer-social {
+    margin-bottom: 16px;
+    }
+    
+    .footer-social a {
+    margin: 0 10px;
+    color: #111;
+    transition: 0.3s ease;
+    }
+    
+    .footer-social a:hover {
+    color: #3f51b5;
+    transform: scale(1.2);
+    }
+    
+    .footer-social .material-icons {
+    font-size: 28px;
+    }
+    
+    .footer-bottom {
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 10px;
+    }
+    
+    @media (max-width: 600px) {
+    .footer-logo {
+    height: 102px;
+    }
+    
+    .footer-tagline {
+    font-size: 0.95rem;
+    }
+    
+    .footer-social .material-icons {
+    font-size: 24px;
+    }
+    }
+    </style>
+
+  </main>  <nav class="bottom-nav">
+    <a href="dashboard.html" class="active">
+      <i class="ri-home-4-line"></i>
+      Home
+    </a>
+    
+    <a href="wallet.html">
+      <i class="ri-wallet-line"></i>
+      Wallet
+    </a>
+    <a href="account.html">
+      <i class="ri-user-3-line"></i>
+      Account
+    </a>
+  </nav>  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('show-sidebar');
+    }
+  </script></body>
+</html>
+<!-- index.html বা যেকোনো পেজে এই স্ক্রিপ্টটি বসাতে পারো -->
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+
+<script>
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyDNA3h0fExL49Bth-G8nnw_PZ_laNn2tUc",
+    authDomain: "hgzy-signal-gpt.firebaseapp.com",
+    projectId: "hgzy-signal-gpt",
+    storageBucket: "hgzy-signal-gpt.firebasestorage.app",
+    messagingSenderId: "898048478460",
+    appId: "1:898048478460:web:78091c7128f9193f27db79",
+    measurementId: "G-LQH91EEL96"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // Check auth state on page load
+  auth.onAuthStateChanged(user => {
+    if (!user) {
+      // If user NOT logged in, redirect to signup.html
+      window.location.href = 'signup.html';
+    }
+    // If logged in, এখানে আপনি চাইলে অন্য কাজ করতে পারেন
+  });
+</script>

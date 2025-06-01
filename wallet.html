@@ -1,0 +1,737 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9fb;
+    }/* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.menu-btn {
+  font-size: 24px;
+  cursor: pointer;
+  color: #444;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding-top: 70px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+}
+
+.sidebar a:hover {
+  background: #f1f1f1;
+}
+
+.show-sidebar {
+  left: 0;
+}
+
+/* Main Content */
+main {
+  padding: 80px 20px 80px;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: white;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+  padding: 10px 0;
+  border-radius: 20px 20px 0 0;
+  z-index: 999;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  color: #999;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-nav a.active {
+  color: #ff5b5b;
+}
+
+.bottom-nav i {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.bottom-nav .active i {
+  background: linear-gradient(135deg, #ff7b7b, #ff4f4f);
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://i.postimg.cc/sxV1Qt8k/20250530-220330.png" alt="Logo">
+      <strong>MBBazar.BD</strong>
+    </div>
+    <div class="menu-btn" onclick="toggleSidebar()">
+      <i class="ri-menu-line"></i>
+    </div>
+  </header>  <div class="sidebar" id="sidebar">
+    <a href="faq.html"><i class="ri-question-line"></i>FAQ</a>
+    <a href="notice.html"><i class="ri-notification-2-line"></i>Update Notice</a>
+    <a href="support.html"><i class="ri-customer-service-2-line"></i>Support</a>
+    <a href="policy.html"><i class="ri-shield-user-line"></i>Policy</a>
+  </div>  <main>
+    <!-- Main dashboard content here -->
+    
+    <!-- Main -->
+    <div class="smart-notice-box">
+    <div class="notice-container">
+    <span class="material-symbols-outlined notice-icon">campaign</span>
+    <span class="notice-label">নোটিশ:</span>
+    <div class="notice-scroll">
+    <div class="notice-text">
+    আসসালামুয়ালাইকুম! অবশ্যই আমাদের <strong> অফিসিয়াল নাম্বার এ লেনদেন করবেন! </strong> অন্য কোন ব্যক্তি বা নাম্বার দ্বারা লেনদেন করা থেকে বিরত থাকুন!
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    
+    <style>
+    .smart-notice-box {
+    width: 100%;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    padding: 10px 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    z-index: 9999;
+    }
+    
+    .notice-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 15px;
+    white-space: nowrap;
+    position: relative;
+    }
+    
+    .notice-icon {
+    color: #ffcc00;
+    font-size: 26px;
+    flex-shrink: 0;
+    }
+    
+    .notice-label {
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    flex-shrink: 0;
+    }
+    
+    .notice-scroll {
+    overflow: hidden;
+    flex: 1;
+    position: relative;
+    height: 30px;
+    }
+    
+    .notice-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-left 15s linear infinite;
+    color: #fff;
+    font-size: 16px;
+    line-height: 30px;
+    }
+    
+    @keyframes scroll-left {
+    0% {
+    transform: translateX(0%);
+    }
+    100% {
+    transform: translateX(-100%);
+    }
+    }
+    
+    /* মোবাইল ফ্রেন্ডলি */
+    @media (max-width: 600px) {
+    .notice-label {
+    font-size: 16px;
+    }
+    
+    .notice-text {
+    font-size: 15px;
+    }
+    }
+    </style>
+    <!DOCTYPE html>
+    <html lang="bn">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Main Balance</title>
+    
+    <!-- Premium Balance Icon -->
+    <link rel="preload" as="image" href="https://cdn-icons-png.flaticon.com/512/3135/3135706.png">
+    
+    <style>
+    #balance-container {
+    background: transparent !important;
+    padding: 10px 16px;
+    border-radius: 10px;
+    max-width: 260px;
+    margin: 12px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #000;
+    text-align: center;
+    user-select: none;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+    
+    .balance-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    }
+    
+    .balance-title img {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    }
+    
+    .balance-amount {
+    font-size: 26px;
+    font-weight: 700;
+    }
+    
+    @media (max-width: 400px) {
+    #balance-container {
+    max-width: 90vw;
+    padding: 8px 12px;
+    }
+    .balance-title {
+    font-size: 16px;
+    }
+    .balance-title img {
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    }
+    .balance-amount {
+    font-size: 22px;
+    }
+    }
+    </style>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    </head>
+    
+    <body>
+    <div id="balance-container" role="region" aria-label="Main Balance">
+    <div class="balance-title">
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135706.png" alt="Balance Icon">
+    Your Main Balance
+    </div>
+    <div class="balance-amount" id="balance-amount">লোড হচ্ছে...</div>
+    </div>
+    
+    <script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyDNA3h0fExL49Bth-G8nnw_PZ_laNn2tUc",
+    authDomain: "hgzy-signal-gpt.firebaseapp.com",
+    projectId: "hgzy-signal-gpt",
+    storageBucket: "hgzy-signal-gpt.firebasestorage.app",
+    messagingSenderId: "898048478460",
+    appId: "1:898048478460:web:78091c7128f9193f27db79",
+    measurementId: "G-LQH91EEL96"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    
+    function fetchBalance(uid) {
+    db.collection('balances').doc(uid).get().then(doc => {
+    const amount = doc.exists && doc.data().amount ? doc.data().amount : 0;
+    document.getElementById('balance-amount').textContent = `৳ ${amount.toLocaleString()} BDT`;
+    }).catch(() => {
+    document.getElementById('balance-amount').textContent = '৳ 0 BDT';
+    });
+    }
+    
+    auth.onAuthStateChanged(user => {
+    if (user) {
+    fetchBalance(user.uid);
+    } else {
+    document.getElementById('balance-amount').textContent = 'অনুগ্রহ করে লগইন করুন';
+    }
+    });
+    </script>
+    </body>
+    </html>
+    <!DOCTYPE html>
+    <html lang="bn">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>প্রিমিয়াম পেমেন্ট অপশন</title>
+    
+    <!-- Google Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    
+    <style>
+    /* === Scoped styles under #premium-payment-wrapper to avoid conflict === */
+    #premium-payment-wrapper {
+    font-family: 'Inter', sans-serif;
+    max-width: 420px;
+    margin: 30px auto;
+    padding: 25px 30px;
+    background: rgba(255 255 255 / 0.95);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 0.12);
+    color: #222;
+    }
+    
+    #premium-payment-wrapper h2 {
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin-bottom: 18px;
+    text-align: center;
+    color: #0a3d62;
+    letter-spacing: 0.04em;
+    }
+    
+    #premium-payment-wrapper label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 1rem;
+    color: #34495e;
+    }
+    
+    #premium-payment-wrapper input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #3498db;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    color: #2c3e50;
+    box-sizing: border-box;
+    outline-offset: 3px;
+    transition: border-color 0.3s ease;
+    }
+    #premium-payment-wrapper input[type="number"]:focus {
+    border-color: #2980b9;
+    }
+    
+    #premium-payment-wrapper .error-msg {
+    color: #e74c3c;
+    margin-top: 6px;
+    font-size: 0.9rem;
+    display: none;
+    }
+    
+    #premium-payment-wrapper .payment-options {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    }
+    
+    #premium-payment-wrapper .payment-btn {
+    flex: 1;
+    background: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 16px;
+    padding: 12px 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.08);
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    
+    #premium-payment-wrapper .payment-btn:hover {
+    border-color: #3498db;
+    box-shadow: 0 8px 20px rgb(52 152 219 / 0.3);
+    background: #eaf6ff;
+    }
+    
+    #premium-payment-wrapper .payment-btn img {
+    max-width: 50px;
+    height: auto;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.12));
+    }
+    
+    #premium-payment-wrapper .payment-btn span {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #34495e;
+    user-select: none;
+    }
+    
+    /* Popup Overlay */
+    #premium-payment-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.48);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    }
+    
+    #premium-payment-popup-overlay.active {
+    display: flex;
+    }
+    
+    #premium-payment-popup {
+    background: white;
+    padding: 30px 28px;
+    border-radius: 18px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    text-align: center;
+    color: #222;
+    }
+    
+    #premium-payment-popup h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0a3d62;
+    }
+    
+    #premium-payment-popup p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    color: #34495e;
+    line-height: 1.4;
+    }
+    
+    #premium-payment-popup .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    }
+    
+    #premium-payment-popup button {
+    padding: 10px 22px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    min-width: 90px;
+    }
+    
+    #premium-payment-popup button.confirm {
+    background-color: #3498db;
+    color: white;
+    box-shadow: 0 5px 15px rgb(52 152 219 / 0.5);
+    }
+    
+    #premium-payment-popup button.confirm:hover {
+    background-color: #2980b9;
+    }
+    
+    #premium-payment-popup button.cancel {
+    background-color: #e0e0e0;
+    color: #555;
+    }
+    
+    #premium-payment-popup button.cancel:hover {
+    background-color: #cacaca;
+    }
+    
+    /* Responsive */
+    @media (max-width: 480px) {
+    #premium-payment-wrapper {
+    max-width: 95vw;
+    padding: 20px 20px;
+    }
+    #premium-payment-popup {
+    padding: 25px 20px;
+    }
+    }
+    </style>
+    </head>
+    <body>
+    
+    <div id="premium-payment-wrapper" aria-label="Add Money Section" role="region">
+    <h2>How much money do you want to add?</h2>
+    <label for="amountInput">Amount (100 - 2000 BDT)</label>
+    <input 
+    type="number" 
+    id="amountInput" 
+    min="100" max="2000" 
+    placeholder="Enter amount" 
+    aria-describedby="amountHelp"
+    required
+    />
+    <div class="error-msg" id="amountError" role="alert"></div>
+    
+    <div class="payment-options" role="list">
+    <button class="payment-btn" data-method="Bkash" aria-label="Pay with Bkash" role="listitem" type="button">
+    <!-- আপনার নিজের ছবি এখানে যোগ করবেন -->
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(3).png" alt="Bkash Logo" />
+    <span>Pay with Bkash</span>
+    </button>
+    <button class="payment-btn" data-method="Nagad" aria-label="Pay with Nagad" role="listitem" type="button">
+    <!-- আপনার নিজের ছবি এখানে যোগ করবেন -->
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(2).png" alt="Nagad Logo" />
+    <span>Pay with Nagad</span>
+    </button>
+    <button class="payment-btn" data-method="Rocket" aria-label="Pay with Rocket" role="listitem" type="button">
+    <!-- আপনার নিজের ছবি এখানে যোগ করবেন -->
+    <img src="https://assets.onecompiler.app/43ea4pg72/43eq73f47/download%20(6).png" alt="Rocket Logo" />
+    <span>Pay with Rocket</span>
+    </button>
+    </div>
+    </div>
+    
+    <!-- Popup Confirmation -->
+    <div id="premium-payment-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-describedby="popupDesc">
+    <div id="premium-payment-popup" role="document">
+    <h3 id="popupTitle">Confirm Payment</h3>
+    <p id="popupDesc"></p>
+    <div class="btn-group">
+    <button class="confirm" id="confirmBtn">Yes</button>
+    <button class="cancel" id="cancelBtn">No</button>
+    </div>
+    </div>
+    </div>
+    
+    <script>
+    (() => {
+    const amountInput = document.getElementById('amountInput');
+    const amountError = document.getElementById('amountError');
+    const paymentButtons = document.querySelectorAll('#premium-payment-wrapper .payment-btn');
+    const popupOverlay = document.getElementById('premium-payment-popup-overlay');
+    const popupDesc = document.getElementById('popupDesc');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    
+    let currentMethod = '';
+    let currentAmount = '';
+    
+    function validateAmount() {
+    const val = parseInt(amountInput.value, 10);
+    if (isNaN(val)) {
+    amountError.textContent = 'অনুগ্রহ করে একটি সঠিক পরিমাণ লিখুন।';
+    amountError.style.display = 'block';
+    return false;
+    }
+    if (val < 100 || val > 2000) {
+    amountError.textContent = 'টাকা অবশ্যই ১০০ থেকে ২০০০ এর মধ্যে হতে হবে।';
+    amountError.style.display = 'block';
+    return false;
+    }
+    amountError.style.display = 'none';
+    return true;
+    }
+    
+    amountInput.addEventListener('input', () => {
+    validateAmount();
+    });
+    
+    function showPopup(method, amount) {
+    popupDesc.textContent = `আপনি ${method} মাধ্যমে একাউন্টে ${amount} টাকা Add করতে চান?`;
+    popupOverlay.classList.add('active');
+    }
+    
+    function hidePopup() {
+    popupOverlay.classList.remove('active');
+    }
+    
+    paymentButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+    if (!validateAmount()) return;
+    currentAmount = amountInput.value;
+    currentMethod = btn.getAttribute('data-method');
+    showPopup(currentMethod, currentAmount);
+    });
+    });
+    
+    confirmBtn.addEventListener('click', () => {
+    hidePopup();
+    let url = '';
+    switch(currentMethod.toLowerCase()) {
+    case 'bkash':
+    url = 'bkash.html';
+    break;
+    case 'nagad':
+    url = 'nagad.html';
+    break;
+    case 'rocket':
+    url = 'rocket.html';
+    break;
+    default:
+    url = 'bkash.html';
+    }
+    url += `?amount=${encodeURIComponent(currentAmount)}`;
+    window.location.href = url;
+    });
+    
+    cancelBtn.addEventListener('click', () => {
+    hidePopup();
+    });
+    
+    popupOverlay.addEventListener('click', (e) => {
+    if (e.target === popupOverlay) {
+    hidePopup();
+    }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
+    hidePopup();
+    }
+    });
+    })();
+    </script>
+    <!-- Premium Warning Message Start -->
+    <div style="background: rgba(255, 239, 239, 0.95); padding: 16px; border-radius: 12px; border-left: 6px solid red; box-shadow: 0 0 12px rgba(0,0,0,0.08); margin: 20px auto; max-width: 95%; font-family: 'Segoe UI', sans-serif;">
+    <div style="display: flex; align-items: flex-start; gap: 10px;">
+    <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" alt="Warning" style="width: 30px; height: 30px; margin-top: 4px;">
+    <div style="color: #000;">
+    <h3 style="margin: 0; font-size: 20px; font-weight: bold;">⚠️ গুরুত্বপূর্ণ সতর্কবার্তা</h3>
+    <p style="margin: 8px 0 6px; font-size: 16px;">
+    আপনি যত টাকা অ্যাড করতে চান, তা সঠিকভাবে <strong>“Amount” বক্সে লিখুন</strong> এবং সঠিক মাধ্যমে (bKash, Nagad, Rocket) সেন্ড মানি করুন।
+    </p>
+    <ul style="margin: 6px 0 10px 20px; font-size: 15px; line-height: 1.6;">
+    <li>সেন্ড মানি করার সময় অবশ্যই <strong>সঠিক ট্রানজেকশন আইডি</strong> সাবমিট করুন।</li>
+    <li><strong>ভুল অ্যামাউন্ট</strong> দিলে বা <strong>ভুল তথ্য</strong> দিলে অ্যাকাউন্ট সাময়িকভাবে বন্ধ করা হতে পারে।</li>
+    <li><strong>অযথা বারবার ভুল তথ্য</strong> দিলে আপনার অ্যাকাউন্ট <span style="color: red;"><strong>স্থায়ীভাবে BAN</strong></span> করা হতে পারে।</li>
+    <li>একবার Add করা টাকা <span style="color: red;"><strong>কখনোই ফেরত দেওয়া হবে না</strong></span>।</li>
+    </ul>
+    <p style="font-size: 15px; color: #555;">
+    যদি আপনি উপরের নিয়মাবলি বুঝে থাকেন, তাহলে নির্ভরযোগ্যভাবে লেনদেন করুন। কোনও সমস্যার জন্য সাপোর্ট অপশনে যোগাযোগ করুন।
+    </p>
+    </div>
+    </div>
+    </div>
+    <!-- Premium Warning Message End -->
+  </main>  <nav class="bottom-nav">
+    <a href="dashboard.html" class="">
+      <i class="ri-home-4-line"></i>
+      Home
+    </a>
+    
+    <a href="wallet.html" class="active">
+      <i class="ri-wallet-line"></i>
+      Wallet
+    </a>
+    <a href="account.html">
+      <i class="ri-user-3-line"></i>
+      Account
+    </a>
+  </nav>  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('show-sidebar');
+    }
+  </script></body>
+</html>
+<!-- index.html বা যেকোনো পেজে এই স্ক্রিপ্টটি বসাতে পারো -->
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+
+<script>
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyDNA3h0fExL49Bth-G8nnw_PZ_laNn2tUc",
+    authDomain: "hgzy-signal-gpt.firebaseapp.com",
+    projectId: "hgzy-signal-gpt",
+    storageBucket: "hgzy-signal-gpt.firebasestorage.app",
+    messagingSenderId: "898048478460",
+    appId: "1:898048478460:web:78091c7128f9193f27db79",
+    measurementId: "G-LQH91EEL96"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  // Check auth state on page load
+  auth.onAuthStateChanged(user => {
+    if (!user) {
+      // If user NOT logged in, redirect to signup.html
+      window.location.href = 'signup.html';
+    }
+    // If logged in, এখানে আপনি চাইলে অন্য কাজ করতে পারেন
+  });
+</script>
