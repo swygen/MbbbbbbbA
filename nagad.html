@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Nagad Add Money</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      background: #f1f3f8 url('https://i.ibb.co/qyyym7P/bg.png');
+      background-size: cover;
+    }
+    .container {
+      max-width: 430px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .header img {
+      height: 70px;
+    }
+    .profile-card {
+      background: #f8f8f8;
+      padding: 12px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .profile-card img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+    .amount {
+      font-size: 24px;
+      text-align: center;
+      background: #f2f2f2;
+      border-radius: 12px;
+      padding: 10px;
+      font-weight: bold;
+    }
+    .section {
+      background: #C90008;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    .section input {
+      width: 94%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+    .section ul {
+      list-style: none;
+      padding: 0;
+    }
+    .section li {
+      font-size: 15px;
+      margin: 6px 0;
+      color: #FFFFFF;
+      font-weight: bold;
+    }
+    .section .highlight {
+      color: #FDE047;
+      font-weight: bold;
+    }
+    .copy-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+    }
+    .copy-box button {
+      background: #e2136e;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .verify-btn {
+      background: #ED3940;
+      color: #fff;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+      text-align: center;
+    }
+    .popup img {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <img src="https://i.postimg.cc/05HJZZ9L/Nagad-Logo-wine.png" alt="bKash">
+  </div>
+
+  <div class="profile-card">
+    <img src="https://i.postimg.cc/SxBnYNxP/20250530-220330.png" alt="JT Logo">
+    <div>
+      <div><b>MBBazar.BD</b></div>
+      <small>ইনভয়েস আইডি: <span id="invoiceId">Loading...</span></small>
+    </div>
+  </div>
+
+  <div class="amount" id="amountDisplay">৳ Loading...</div>
+
+  <div class="section">
+    <label>ট্রানজেকশন আইডি দিন</label>
+    <input type="text" id="trxId" placeholder="ট্রানজেকশন আইডি দিন">
+
+    <ul>
+      <li>*167# ডায়াল করে আপনার Nagad এ যান অথবা Nagad অ্যাপে যান।</li>
+      <li><span class="highlight">"Send Money"</span> -এ ক্লিক করুন।</li>
+      <li>গ্রাহক নম্বর হিসাবে লিখুন:</li>
+      <div class="copy-box">
+        <span id="bkashNumber">01855966005</span>
+        <button onclick="copyNumber()">Copy</button>
+      </div>
+      <li>টাকার পরিমাণ: <span class="highlight" id="amountText">Loading...</span></li>
+      <li>PIN দিয়ে নিশ্চিত করুন।</li>
+      <li>সব ঠিক থাকলে আপনি Nagad থেকে কনফার্মেশন পাবেন।</li>
+      <li>তারপর উপরের ট্রানজেকশন আইডি দিন ও নিচের <b>VERIFY</b> বাটনে ক্লিক করুন।</li>
+    </ul>
+
+    <button class="verify-btn" onclick="submitPayment()">VERIFY</button>
+  </div>
+</div>
+
+<div class="popup" id="popup">
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+<dotlottie-player src="https://lottie.host/0c34a6f3-b1da-427b-bc20-c1fc03a94c0c/TGxjCMS0VX.lottie" background="transparent" speed="1" style="width: 200px; height: 200px" loop autoplay></dotlottie-player>
+  <p> আপনার Add Money Request সফল ভাবে দাখিল হলো।<br>দয়া করে কিছুক্ষণ অপেক্ষা করুন আমরা যাচাই করছি!<br>ধন্যবাদ ™</p>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+ const firebaseConfig = {
+  apiKey: "AIzaSyChZH6yY3nCIV-CXyQr0aTomBxy_V4HnKM",
+  authDomain: "mbbazar-bd.firebaseapp.com",
+  projectId: "mbbazar-bd",
+  storageBucket: "mbbazar-bd.firebasestorage.app",
+  messagingSenderId: "528931661008",
+  appId: "1:528931661008:web:a0b60c31465619b6906ad5",
+  measurementId: "G-6X66JBN082"
+};
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const amount = urlParams.get('amount') || '0';
+  document.getElementById('amountDisplay').innerText = `৳ ${amount}`;
+  document.getElementById('amountText').innerText = `৳ ${amount}`;
+  const invoiceId = 'NAG' + Math.random().toString(36).substring(2, 10).toUpperCase();
+  document.getElementById('invoiceId').innerText = invoiceId;
+
+  window.copyNumber = function () {
+    navigator.clipboard.writeText(document.getElementById('bkashNumber').innerText);
+    alert('Number copied to clipboard!');
+  };
+
+  window.submitPayment = async function () {
+    const trxId = document.getElementById('trxId').value.trim();
+    if (!trxId) {
+      alert('ট্রানজেকশন আইডি দিন');
+      return;
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const data = {
+          uid: user.uid,
+          amount: amount,
+          method: 'bKash',
+          transactionId: trxId,
+          invoiceId: invoiceId,
+          createdAt: serverTimestamp()
+        };
+        try {
+          await addDoc(collection(db, 'payments'), data);
+          document.getElementById('popup').style.display = 'block';
+          document.getElementById('trxId').value = '';
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 5000);
+        } catch (error) {
+          alert('❌ সাবমিট ব্যর্থ হয়েছে: ' + error.message);
+        }
+      } else {
+        alert('অনুগ্রহ করে লগইন করুন');
+      }
+    });
+  };
+</script>
+
+</body>
+</html>
