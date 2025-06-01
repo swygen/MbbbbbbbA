@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9fb;
+    }/* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.menu-btn {
+  font-size: 24px;
+  cursor: pointer;
+  color: #444;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding-top: 70px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+}
+
+.sidebar a:hover {
+  background: #f1f1f1;
+}
+
+.show-sidebar {
+  left: 0;
+}
+
+/* Main Content */
+main {
+  padding: 80px 20px 80px;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: white;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+  padding: 10px 0;
+  border-radius: 20px 20px 0 0;
+  z-index: 999;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  color: #999;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-nav a.active {
+  color: #ff5b5b;
+}
+
+.bottom-nav i {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.bottom-nav .active i {
+  background: linear-gradient(135deg, #ff7b7b, #ff4f4f);
+  color: white;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="https://i.postimg.cc/sxV1Qt8k/20250530-220330.png" alt="Logo">
+      <strong>MBBazar.BD</strong>
+    </div>
+    <div class="menu-btn" onclick="toggleSidebar()">
+      <i class="ri-menu-line"></i>
+    </div>
+  </header>  <div class="sidebar" id="sidebar">
+    <a href="faq.html"><i class="ri-question-line"></i>FAQ</a>
+    <a href="notice.html"><i class="ri-notification-2-line"></i>Update Notice</a>
+    <a href="support.html"><i class="ri-customer-service-2-line"></i>Support</a>
+    <a href="policy.html"><i class="ri-shield-user-line"></i>Policy</a>
+  </div>  <main>
+    <!-- Main dashboard content here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Premium Profile Card</title>
+
+  <!-- Google Material Icons CDN -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <style>
+    /* Scope for premium profile card */
+    #premium-profile-card {
+      max-width: 380px;
+      margin: 25px auto;
+      background: rgba(255 255 255 / 0.12); /* very subtle white translucent */
+      border-radius: 20px;
+      box-shadow:
+        0 8px 32px 0 rgba(31, 38, 135, 0.37),
+        inset 0 0 10px rgba(255 255 255 / 0.25);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #eee;
+      padding: 30px 24px 36px 24px;
+      box-sizing: border-box;
+      user-select: none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255 255 255 / 0.2);
+    }
+
+    #premium-profile-card * {
+      box-sizing: inherit;
+    }
+
+    /* Profile Image */
+    #premium-profile-card .profile-image {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 18px auto;
+      border: 4px solid #6a82fb;
+      box-shadow:
+        0 0 15px 2px #6a82fb;
+      transition: box-shadow 0.3s ease;
+    }
+    #premium-profile-card .profile-image:hover {
+      box-shadow:
+        0 0 25px 5px #8e9eab;
+    }
+
+    /* UID text */
+    #premium-profile-card .uid {
+      font-weight: 700;
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: 1.5px;
+      color: #a3bffa;
+      text-shadow: 0 0 5px rgba(107, 130, 251, 0.6);
+    }
+
+    /* Email text */
+    #premium-profile-card .email {
+      font-size: 15.5px;
+      text-align: center;
+      margin-bottom: 18px;
+      color: #cbd5e1;
+      word-break: break-word;
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    /* Balance */
+    #premium-profile-card .balance {
+      font-size: 22px;
+      font-weight: 900;
+      color: #7ef192;
+      text-align: center;
+      margin-bottom: 28px;
+      text-shadow: 0 0 12px #7ef192;
+      letter-spacing: 0.06em;
+    }
+
+    /* Buttons container */
+    #premium-profile-card .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    /* Buttons */
+    #premium-profile-card .btn {
+      flex: 1 1 42%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      text-align: center;
+      padding: 12px 18px;
+      box-shadow:
+        0 4px 10px rgba(118, 75, 162, 0.5);
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      user-select: none;
+      font-size: 15px;
+    }
+    #premium-profile-card .btn:hover {
+      background: linear-gradient(135deg, #8a6ffb 0%, #a36ade 100%);
+      box-shadow:
+        0 6px 20px rgba(163, 106, 222, 0.8);
+    }
+
+    /* Icon inside buttons */
+    #premium-profile-card .material-icons {
+      font-size: 20px;
+      color: #e0d7f5;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 420px) {
+      #premium-profile-card {
+        max-width: 92vw;
+        padding: 20px 16px 28px 16px;
+      }
+      #premium-profile-card .btn {
+        flex: 1 1 100%;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body style="background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%); min-height:100vh; margin:0; display:flex; align-items:center; justify-content:center;">
+
+<div id="premium-profile-card" aria-label="User Profile Card">
+  <img
+    class="profile-image"
+    id="profileImage"
+    src="https://via.placeholder.com/110"
+    alt="User profile picture"
+    loading="lazy"
+  />
+  <div class="uid" id="uidText">UID - -----</div>
+  <div class="email" id="emailText">email@example.com</div>
+  <div class="balance" id="balanceText">Balance: ৳0.00</div>
+
+  <div class="btn-group">
+    <a href="#add-money" id="btnAddMoney" class="btn" title="Add Money">
+      <span class="material-icons">add_circle_outline</span> Add Money
+    </a>
+    <a href="#notice" id="btnNotice" class="btn" title="Notice">
+      <span class="material-icons">notifications_none</span> Notice
+    </a>
+    <a href="#support" id="btnSupport" class="btn" title="Support">
+      <span class="material-icons">support_agent</span> Support
+    </a>
+    <a href="#developer-info" id="btnDeveloperInfo" class="btn" title="Developer Info">
+      <span class="material-icons">code</span> Developer Info
+    </a>
+    <a href="#privacy-policy" id="btnPrivacyPolicy" class="btn" title="Privacy Policy">
+      <span class="material-icons">privacy_tip</span> Privacy Policy
+    </a>
+    <a href="#logout" id="btnLogout" class="btn" title="Log out">
+      <span class="material-icons">logout</span> Log out
+    </a>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+  // Firebase config (your provided one)
+  const firebaseConfig = {
+    apiKey: "AIzaSyChZH6yY3nCIV-CXyQr0aTomBxy_V4HnKM",
+    authDomain: "mbbazar-bd.firebaseapp.com",
+    projectId: "mbbazar-bd",
+    storageBucket: "mbbazar-bd.firebasestorage.app",
+    messagingSenderId: "528931661008",
+    appId: "1:528931661008:web:a0b60c31465619b6906ad5",
+    measurementId: "G-6X66JBN082"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  // Update UI on auth state change
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      const uid = user.uid || "";
+      const email = user.email || "";
+      document.getElementById('emailText').textContent = email;
+      document.getElementById('uidText').textContent = "UID - " + uid.substring(0,5);
+      document.getElementById('profileImage').src = user.photoURL || "https://via.placeholder.com/110";
+
+      // Fetch balance from Firestore
+      try {
+        const userDoc = await db.collection("users").doc(uid).get();
+        if (userDoc.exists) {
+          const data = userDoc.data();
+          const balance = data?.balance || 0;
+          document.getElementById('balanceText').textContent = `Balance: ৳${balance.toFixed(2)}`;
+        } else {
+          document.getElementById('balanceText').textContent = `Balance: ৳0.00`;
+        }
+      } catch (error) {
+        console.error("Error fetching balance:", error);
+        document.getElementById('balanceText').textContent = `Balance: ৳0.00`;
+      }
+
+      // Set actual URLs here
+      document.getElementById('btnAddMoney').href = "/add-money";
+      document.getElementById('btnNotice').href = "/notice";
+      document.getElementById('btnSupport').href = "/support";
+      document.getElementById('btnDeveloperInfo').href = "/developer-info";
+      document.getElementById('btnPrivacyPolicy').href = "/privacy-policy";
+      document.getElementById('btnLogout').href = "#";
+
+      // Logout event
+      document.getElementById('btnLogout').addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+          await auth.signOut();
+          alert("Logged out successfully!");
+          window.location.reload();
+        } catch(err) {
+          alert("Logout failed: " + err.message);
+        }
+      });
+
+    } else {
+      // Not signed in state
+      document.getElementById('emailText').textContent = "Not signed in";
+      document.getElementById('uidText').textContent = "UID - -----";
+      document.getElementById('balanceText').textContent = "Balance: ৳0.00";
+      document.getElementById('profileImage').src = "https://i.postimg.cc/ydQ9FBS6/user-2.png";
+    }
+  });
+</script>
+
+</body>
+</html>
+  </main>  <nav class="bottom-nav">
+    <a href="dashboard.html" class="">
+      <i class="ri-home-4-line"></i>
+      Home
+    </a>
+    
+    <a href="wallet.html">
+      <i class="ri-wallet-line"></i>
+      Wallet
+    </a>
+    <a href="account.html" class="active">
+      <i class="ri-user-3-line"></i>
+      Account
+    </a>
+  </nav>  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('show-sidebar');
+    }
+  </script></body>
+</html>
